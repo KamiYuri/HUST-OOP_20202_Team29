@@ -1,8 +1,8 @@
 package com.kamiyuri;
 
 public class Main {
-
     public static void main(String[] args) {
-	    System.out.print("Test alo alo 111");
+        System.out.print("Test times 222");
+        System.out.print("sasa");
     }
 }
