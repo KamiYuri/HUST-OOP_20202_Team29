@@ -7,25 +7,26 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="358.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="99.0" prefWidth="374.0">
          <children>
-            <Pane prefHeight="54.0" prefWidth="90.0">
+            <Pane prefHeight="54.0" prefWidth="154.0">
                <children>
-                  <Label layoutX="14.0" layoutY="18.0" text="Nhập địa chỉ" />
+                  <Label layoutX="14.0" layoutY="18.0" text="Nhập tên khách hàng" />
                </children>
             </Pane>
             <Pane prefHeight="54.0" prefWidth="241.0">
                <children>
-                  <TextField layoutX="12.0" layoutY="14.0" prefHeight="27.0" prefWidth="241.0" />
+                  <TextField layoutX="12.0" layoutY="14.0" prefHeight="27.0" prefWidth="218.0" />
                </children>
             </Pane>
          </children>
       </HBox>
       <Pane prefHeight="87.0" prefWidth="302.0">
          <children>
-            <Button layoutX="151.0" layoutY="1.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="172.0" layoutY="1.0" mnemonicParsing="false" text="Button" />
          </children>
       </Pane>
    </children>
