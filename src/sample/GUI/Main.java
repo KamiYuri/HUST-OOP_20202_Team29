@@ -1,34 +1,27 @@
 package sample.GUI;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import sample.GUI.MainScene.DonHang_Controller;
 
-import java.io.IOException;
-
-public class Main extends Application {
-    private Stage primaryStage;
-    private BorderPane mainLayout;
+public class Main extends Application{
+    @FXML
+    private Stage thisStage;
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Quản lý đơn hàng");
-        showMainView();
-    }
+    public void start(Stage thisStage) {
+        try {
+            Parent root = FXMLLoader.load(DonHang_Controller.class.getResource("DonHang.fxml"));
+            thisStage.setTitle("Don Hang");
+            thisStage.setScene(new Scene(root));
+            thisStage.show();
+        } catch (Exception e) {
 
-    private void showMainView() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("../MainScene/DonHang.fxml"));
-        mainLayout = loader.load();
-        Scene scene = new Scene(mainLayout);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        }
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    public static void main(String[] args) {launch(args);}
 }
