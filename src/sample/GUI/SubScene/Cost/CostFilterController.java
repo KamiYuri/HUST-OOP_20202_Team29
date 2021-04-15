@@ -1,4 +1,4 @@
-package sample.SubScene.Cost;
+package sample.GUI.SubScene.Cost;
 
 public class CostFilterController {
 }
