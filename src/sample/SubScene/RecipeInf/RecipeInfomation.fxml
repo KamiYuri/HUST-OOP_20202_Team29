@@ -8,8 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SubScene.RecipeInf.RecipeInfomationController">
    <children>
       <Pane prefHeight="198.0" prefWidth="586.0">
          <children>
@@ -24,17 +25,24 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
+                  <Pane fx:id="sender" prefHeight="200.0" prefWidth="200.0" style="-fx-border-style: hidden solid solid hidden; -fx-border-width: 2;" styleClass="sender">
                      <children>
-                        <Label layoutX="127.0" layoutY="23.0" text="Người gửi" />
+                        <Label contentDisplay="CENTER" layoutX="111.0" layoutY="20.0" text="Người gửi" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
-                  <Pane id="receiver" prefHeight="66.0" prefWidth="278.0" GridPane.columnIndex="1">
+                  <Pane prefHeight="66.0" prefWidth="278.0" style="-fx-border-style: hidden hidden solid hidden; -fx-border-width: 2;" styleClass="receiver" GridPane.columnIndex="1">
                      <children>
-                        <Label layoutX="122.0" layoutY="23.0" text="Người nhận" />
+                        <Label layoutX="104.0" layoutY="20.0" text="Người nhận">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
                      </children>
                   </Pane>
-                  <HBox prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <HBox prefHeight="200.0" prefWidth="200.0" style="-fx-border-style: hidden solid solid hidden;" GridPane.rowIndex="1">
                      <children>
                         <Pane>
                            <children>
@@ -48,7 +56,7 @@
                         </Pane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-border-style: hidden hidden solid hidden;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Pane>
                            <children>
@@ -62,7 +70,7 @@
                         </Pane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0"  GridPane.rowIndex="2">
+                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-border-style: hidden solid solid hidden;" GridPane.rowIndex="2">
                      <children>
                         <Pane>
                            <children>
@@ -76,7 +84,7 @@
                         </Pane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-border-style: hidden hidden solid hidden;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <Pane>
                            <children>
@@ -94,94 +102,98 @@
             </GridPane>
          </children>
       </Pane>
-      <VBox>
+      <Pane prefHeight="190.0" prefWidth="437.0">
          <children>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="600.0">
+            <VBox>
                <children>
-                  <Pane>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="600.0">
                      <children>
-                        <Label layoutX="15.0" layoutY="15.0" text="Thời gian tạo đơn :" />
+                        <Pane layoutX="10.0">
+                           <children>
+                              <Label layoutX="50.0" layoutY="15.0" text="Thời gian tạo đơn :" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="40.0" prefWidth="316.0">
+                           <children>
+                              <Label layoutX="15.0" layoutY="15.0" text="28/01/2001" />
+                           </children>
+                        </Pane>
                      </children>
-                  </Pane>
-                  <Pane prefHeight="0.0" prefWidth="82.0">
+                  </HBox>
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0">
                      <children>
-                        <Label layoutX="15.0" layoutY="15.0" text="28/01/2001" />
+                        <Pane>
+                           <children>
+                              <Label layoutX="50.0" layoutY="5.0" text="Địa chỉ nhận hàng :" />
+                           </children>
+                        </Pane>
+                        <Pane>
+                           <children>
+                              <Label layoutX="15.0" layoutY="5.0" text="191A, Đại La, Đồng Tâm, Hai Bà Trưng, Hà Nội" />
+                           </children>
+                        </Pane>
                      </children>
-                  </Pane>
+                  </HBox>
+                  <HBox prefHeight="30.0">
+                     <children>
+                        <Pane>
+                           <children>
+                              <Label layoutX="50.0" layoutY="8.0" text="Cân nặng :" />
+                           </children>
+                        </Pane>
+                        <Pane prefHeight="30.0" prefWidth="263.0">
+                           <children>
+                              <Label layoutX="15.0" layoutY="8.0" text="75 Kg" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="600.0">
+                     <children>
+                        <Pane>
+                           <children>
+                              <Label layoutX="50.0" layoutY="5.0" text="Khoảng cách vận chuyển :" />
+                           </children>
+                        </Pane>
+                        <Pane>
+                           <children>
+                              <Label layoutX="15.0" layoutY="5.0" text="200 KM" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="525.0">
+                     <children>
+                        <Pane>
+                           <children>
+                              <Label layoutX="50.0" layoutY="5.0" text="Chi phí :" />
+                           </children>
+                        </Pane>
+                        <Pane>
+                           <children>
+                              <Label layoutX="15.0" layoutY="5.0" text="500.000 VND" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="600.0">
+                     <children>
+                        <Pane>
+                           <children>
+                              <Label layoutX="50.0" layoutY="5.0" text="Cách vận chuyển: " />
+                           </children>
+                        </Pane>
+                        <Pane>
+                           <children>
+                              <Label layoutX="15.0" layoutY="5.0" text="Máy bay" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0">
-               <children>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="Địa chỉ nhận hàng :" />
-                     </children>
-                  </Pane>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="191A, Đại La, Đồng Tâm, Hai Bà Trưng, Hà Nội" />
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-            <HBox prefHeight="30.0">
-               <children>
-                  <Pane prefHeight="22.0" prefWidth="85.0">
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="Cân nặng :" />
-                     </children>
-                  </Pane>
-                  <Pane>
-                     <children>
-                        <Label layoutY="5.0" text="75 Kg" />
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-            <HBox prefHeight="30.0" prefWidth="600.0">
-               <children>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="Khoảng cách vận chuyển :" />
-                     </children>
-                  </Pane>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="200 KM" />
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-            <HBox prefHeight="30.0" prefWidth="600.0">
-               <children>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="Chi phí :" />
-                     </children>
-                  </Pane>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="500.000 VND" />
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
-            <HBox prefHeight="30.0" prefWidth="600.0">
-               <children>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="Cách vận chuyển: " />
-                     </children>
-                  </Pane>
-                  <Pane>
-                     <children>
-                        <Label layoutX="15.0" layoutY="5.0" text="Máy bay" />
-                     </children>
-                  </Pane>
-               </children>
-            </HBox>
+            </VBox>
          </children>
-      </VBox>
+      </Pane>
       <Pane>
          <children>
             <GridPane layoutX="-7.0" prefHeight="65.0" prefWidth="614.0">
