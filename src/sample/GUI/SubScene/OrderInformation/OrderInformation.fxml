@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SubScene.RecipeInf.RecipeInfomationController">
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.GUI.SubScene.Name.NameController">
    <children>
       <Pane prefHeight="198.0" prefWidth="586.0">
          <children>

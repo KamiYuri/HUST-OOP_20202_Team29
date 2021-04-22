@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sample.GUI.MainScene.DonHang_Controller;
+import sample.GUI.Order.OrderController;
 
 public class Main extends Application{
     @FXML
@@ -15,7 +15,7 @@ public class Main extends Application{
     @Override
     public void start(Stage thisStage) {
         try {
-            Parent root = FXMLLoader.load(DonHang_Controller.class.getResource("DonHang.fxml"));
+            Parent root = FXMLLoader.load(OrderController.class.getResource("Order.fxml"));
             thisStage.setTitle("Don Hang");
             thisStage.setScene(new Scene(root));
             thisStage.show();
