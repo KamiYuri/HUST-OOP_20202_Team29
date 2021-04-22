@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.SubScene.Name.NameController">
     <children>
         <HBox prefHeight="99.0" prefWidth="374.0">
             <children>
@@ -18,14 +18,14 @@
                 </Pane>
                 <Pane prefHeight="54.0" prefWidth="241.0">
                     <children>
-                        <TextField layoutX="12.0" layoutY="14.0" prefHeight="27.0" prefWidth="218.0" />
+                        <TextField fx:id="textInput" layoutX="12.0" layoutY="14.0" prefHeight="27.0" prefWidth="218.0" />
                     </children>
                 </Pane>
             </children>
         </HBox>
         <Pane prefHeight="87.0" prefWidth="302.0">
             <children>
-                <Button layoutX="173.0" layoutY="2.0" mnemonicParsing="false" text="Submit" />
+                <Button fx:id="submit" layoutX="173.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#submitClick" text="Submit" />
             </children>
         </Pane>
     </children>

@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.GUI.Order.OrderController;
 
+import java.util.Objects;
+
 public class Main extends Application{
     @FXML
     private Stage thisStage;
@@ -15,8 +17,8 @@ public class Main extends Application{
     @Override
     public void start(Stage thisStage) {
         try {
-            Parent root = FXMLLoader.load(OrderController.class.getResource("Order.fxml"));
-            thisStage.setTitle("Don Hang");
+            Parent root = FXMLLoader.load(Objects.requireNonNull(OrderController.class.getResource("Order.fxml")));
+            thisStage.setTitle("Đơn hàng");
             thisStage.setScene(new Scene(root));
             thisStage.show();
         } catch (Exception e) {

@@ -25,16 +25,16 @@ public class OrderController {
     @FXML
     public void senderClick() {
         sender.setOnAction(actionEvent -> {
-            try {
-                Parent subWindow = FXMLLoader.load(Objects.requireNonNull(NameController.class.getResource("Name.fxml")));
-                Stage subStage = new Stage();
-                subStage.initModality(Modality.WINDOW_MODAL);
-                subStage.setScene(new Scene(subWindow));
-                subStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+                    try {
+                        Parent subWindow = FXMLLoader.load(Objects.requireNonNull(NameController.class.getResource("Name.fxml")));
+                        Stage subStage = new Stage();
+                        subStage.initModality(Modality.APPLICATION_MODAL);
+                        subStage.setScene(new Scene(subWindow));
+                        subStage.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
         );
     }
 
@@ -45,15 +45,16 @@ public class OrderController {
     @FXML
     public void addressClick() {
         address.setOnAction(actionEvent -> {
-            try {
-                Parent subWindow = FXMLLoader.load(Objects.requireNonNull(AddressController.class.getResource("Address.fxml")));
-                Stage subStage = new Stage();
-                subStage.setScene(new Scene(subWindow));
-                subStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+                    try {
+                        Parent subWindow = FXMLLoader.load(Objects.requireNonNull(AddressController.class.getResource("Address.fxml")));
+                        Stage subStage = new Stage();
+                        subStage.setScene(new Scene(subWindow));
+                        subStage.initModality(Modality.APPLICATION_MODAL);
+                        subStage.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
         );
     }
 
@@ -64,15 +65,16 @@ public class OrderController {
     @FXML
     public void costClick() {
         cost.setOnAction(actionEvent -> {
-            try {
-                Parent subWindow = FXMLLoader.load(Objects.requireNonNull(CostController.class.getResource("Cost.fxml")));
-                Stage subStage = new Stage();
-                subStage.setScene(new Scene(subWindow));
-                subStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+                    try {
+                        Parent subWindow = FXMLLoader.load(Objects.requireNonNull(CostController.class.getResource("Cost.fxml")));
+                        Stage subStage = new Stage();
+                        subStage.setScene(new Scene(subWindow));
+                        subStage.initModality(Modality.APPLICATION_MODAL);
+                        subStage.showAndWait();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
         );
     }
 
@@ -87,8 +89,9 @@ public class OrderController {
                 Parent subWindow = FXMLLoader.load(Objects.requireNonNull(MonthController.class.getResource("Month.fxml")));
                 Stage subStage = new Stage();
                 subStage.setScene(new Scene(subWindow));
-                subStage.show();
-            } catch (Exception e){
+                subStage.initModality(Modality.APPLICATION_MODAL);
+                subStage.showAndWait();
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });

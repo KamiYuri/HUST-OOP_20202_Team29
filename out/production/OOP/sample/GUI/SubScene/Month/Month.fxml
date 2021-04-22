@@ -16,7 +16,7 @@
       </Pane>
       <Pane prefHeight="41.0" prefWidth="255.0">
          <children>
-            <Button layoutX="101.0" layoutY="2.0" mnemonicParsing="false" text="Submit" />
+            <Button fx:id="submit" layoutX="101.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#submitClick" text="Submit" />
          </children>
       </Pane>
    </children>
