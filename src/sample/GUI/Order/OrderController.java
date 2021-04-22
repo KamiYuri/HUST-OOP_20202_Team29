@@ -5,33 +5,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import sample.GUI.SubScene.Address.AddressController;
 import sample.GUI.SubScene.Cost.CostController;
+import sample.GUI.SubScene.Month.MonthController;
 import sample.GUI.SubScene.Name.NameController;
 
 import java.io.IOException;
 
 public class OrderController {
-
-//    //Menu chọn tháng//
-//    ObservableList<String> monthList = FXCollections
-//            .observableArrayList(
-//                    "Tháng 1", "Tháng 2", "Tháng 3",
-//                    "Tháng 4", "Tháng 5", "Tháng 6",
-//                    "Tháng 7", "Tháng 8", "Tháng 9",
-//                    "Tháng 10", "Tháng 11", "Tháng 12"
-//            );
-//    @FXML
-//    private ChoiceBox monthSelect;
-//
-//
-//    @FXML
-//    private void initialize() {
-//        monthSelect.setValue("Chọn một tháng");
-//        monthSelect.setItems(monthList);
-//    }
 
     //Menu người gửi//
     @FXML
@@ -41,8 +26,9 @@ public class OrderController {
     public void senderClick() {
         sender.setOnAction(actionEvent -> {
             try {
-                Parent subWindow = FXMLLoader.load(NameController.class.getResource("sample/GUI/SubScene/Name/Name.fxml"));
+                Parent subWindow = FXMLLoader.load(NameController.class.getResource("Name.fxml"));
                 Stage subStage = new Stage();
+                subStage.initModality(Modality.WINDOW_MODAL);
                 subStage.setScene(new Scene(subWindow));
                 subStage.show();
             } catch (IOException e) {
@@ -90,7 +76,23 @@ public class OrderController {
         );
     }
 
+    //Menu thống kê//
+    @FXML
+    private MenuItem month;
 
+    @FXML
+    public void monthClick() {
+        month.setOnAction(actionEvent -> {
+            try {
+                Parent subWindow = FXMLLoader.load(MonthController.class.getResource("Month.fxml"));
+                Stage subStage = new Stage();
+                subStage.setScene(new Scene(subWindow));
+                subStage.show();
+            } catch (Exception e){
+
+            }
+        });
+    }
 }
 
 

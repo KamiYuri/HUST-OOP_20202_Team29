@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.CustomMenuItem?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Order.OrderController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="Thêm" />
-          <Menu mnemonicParsing="false" text="Tìm kiếm theo...">
+          <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Thêm" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="Tìm kiếm">
             <items>
               <MenuItem fx:id="sender" mnemonicParsing="false" onAction="#senderClick" text="Tên người gửi" />
                   <MenuItem fx:id="address" mnemonicParsing="false" onAction="#addressClick" text="Địa chỉ" />
@@ -22,15 +22,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Thống kê">
                <items>
-                  <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
-                     <content>
-                        <Pane>
-                           <children>
-                              <ChoiceBox fx:id="monthSelect" prefWidth="150.0" />
-                           </children>
-                        </Pane>
-                     </content>
-                  </CustomMenuItem>
+                  <MenuItem fx:id="month" mnemonicParsing="false" onAction="#monthClick" text="Theo tháng" />
                </items></Menu>
         </menus>
       </MenuBar>
