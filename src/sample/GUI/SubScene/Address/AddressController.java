@@ -1,4 +1,4 @@
 package sample.GUI.SubScene.Address;
 
-public class AddressFilter {
+public class AddressController {
 }

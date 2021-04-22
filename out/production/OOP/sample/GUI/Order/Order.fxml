@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="sample.GUI.Order.OrderController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Order.OrderController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -16,8 +16,8 @@
           <Menu mnemonicParsing="false" text="Tìm kiếm theo...">
             <items>
               <MenuItem fx:id="sender" mnemonicParsing="false" onAction="#senderClick" text="Tên người gửi" />
-                  <MenuItem mnemonicParsing="false" text="Địa chỉ" />
-                  <MenuItem mnemonicParsing="false" text="Chi phí" />
+                  <MenuItem fx:id="address" mnemonicParsing="false" onAction="#addressClick" text="Địa chỉ" />
+                  <MenuItem fx:id="cost" mnemonicParsing="false" onAction="#costClick" text="Chi phí" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Thống kê">
