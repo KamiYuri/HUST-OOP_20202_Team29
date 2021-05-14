@@ -1,8 +1,12 @@
 package BackEnd;
 
+import java.util.Date;
+import java.util.ArrayList;
+
 public class Order {
     private String senderName, senderPhone, receiverName, receiverPhone, address, date;
-    private int weight, distance, shipping, shippingCost;
+    private double weight, distance, shippingCost;
+    private int shipping;
 
     public Order() {
         this.senderName = "";
@@ -10,15 +14,15 @@ public class Order {
         this.receiverName = "";
         this.receiverPhone = "";
         this.address = "";
-        this.weight = 0;
-        this.distance = 0;
-        this.shippingCost = 0;
+        this.weight = 0.0;
+        this.distance = 0.0;
+        this.shippingCost = 0.0;
         this.shipping = 0;
         this.date = "";
     }
 
     public Order(String senderName, String senderPhone, String receiverName, String receiverPhone,
-                 String address, int weight, int distance, int shipping, String date) {
+                 String address, double weight, double distance, int shipping, String date) {
         this.senderName = senderName;
         this.senderPhone = senderPhone;
         this.receiverName = receiverName;
@@ -71,36 +75,36 @@ public class Order {
         return address;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(double distance) {
         this.distance = distance;
     }
 
-    public int getCost() {
+    public double getCost() {
         return shippingCost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(double cost) {
         this.shippingCost = cost;
     }
 
-    public int getWay() {
+    public double getShipping() {
         return shipping;
     }
 
-    public void setWay(int way) {
-        this.shipping = way;
+    public void setShipping(int shipping) {
+        this.shipping = shipping;
     }
 
     public String getDate() {
@@ -120,7 +124,7 @@ public class Order {
         System.out.println(getWeight());
         System.out.println(getDistance());
         System.out.println(getCost());
-        System.out.println(getWay());
+        System.out.println(getShipping());
         System.out.println(getDate());
     }
 }
