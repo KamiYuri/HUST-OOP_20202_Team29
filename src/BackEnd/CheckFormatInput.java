@@ -16,7 +16,7 @@ public class CheckFormatInput {
 
         }
 
-    public static boolean isFullname(String name) {
+    public static boolean checkName (String name) {
         String regex = "^[a-zA-Z\\s]+";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
