@@ -67,7 +67,7 @@ public class Management {
         return temp;
     }
 
-    public static ArrayList<Order> searchByAddress(String address){
+    public static ArrayList<Order> addressList(String address){
         ArrayList<Order> temp = new ArrayList<>();
         for (Order o: danhSach){
             if(o.getAddress().contains(address))
