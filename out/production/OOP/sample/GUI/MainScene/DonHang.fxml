@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.MainScene.DonHang_Controller">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Thêm" />
+          <Menu mnemonicParsing="false" text="Tìm kiếm theo...">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Tên người gửi" />
+                  <MenuItem mnemonicParsing="false" text="Địa chỉ" />
+                  <MenuItem mnemonicParsing="false" text="Chi phí" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Thống kê">
+               <items>
+                  <CustomMenuItem mnemonicParsing="false" text="Unspecified Action">
+                     <content>
+                        <Pane>
+                           <children>
+                              <ChoiceBox fx:id="monthSelect" prefWidth="150.0" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </CustomMenuItem>
+               </items></Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

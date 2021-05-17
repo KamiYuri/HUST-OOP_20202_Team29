@@ -1,6 +1,5 @@
-package sample.MainScene;
+package sample.GUI.MainScene;
 
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

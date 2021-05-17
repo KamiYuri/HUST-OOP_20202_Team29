@@ -1,4 +1,4 @@
-package sample.Input;
+package sample.GUI.Input;
 
 
 public class Input_Controller {
