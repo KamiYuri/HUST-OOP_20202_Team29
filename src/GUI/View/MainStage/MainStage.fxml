@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1226.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar prefHeight="0.0" prefWidth="1226.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="add" mnemonicParsing="false" onAction="#addClick" text="Thêm" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="Tìm kiếm">
+            <items>
+              <MenuItem fx:id="sender" mnemonicParsing="false" onAction="#senderClick" text="Tên người gửi" />
+                  <MenuItem fx:id="address" mnemonicParsing="false" onAction="#addressClick" text="Địa chỉ" />
+                  <MenuItem fx:id="cost" mnemonicParsing="false" onAction="#costClick" text="Chi phí" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Thống kê">
+               <items>
+                  <MenuItem fx:id="month" mnemonicParsing="false" onAction="#monthClick" text="Theo tháng" />
+               </items></Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <Pane prefHeight="373.0" prefWidth="894.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView fx:id="tableView" prefHeight="373.0" prefWidth="1030.0">
+               <columns>
+                  <TableColumn fx:id="id_col" editable="false" prefWidth="50.0" resizable="false" text="Thứ tự" />
+                  <TableColumn prefWidth="75.0" text="Người gửi">
+                     <columns>
+                        <TableColumn fx:id="senderName_col" prefWidth="170.0" text="Họ tên" />
+                        <TableColumn fx:id="senderPhone_col" prefWidth="150.0" text="Số điện thoại" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn prefWidth="75.0" text="Người nhận">
+                     <columns>
+                        <TableColumn fx:id="receiverName_col" prefWidth="170.0" text="Họ tên" />
+                        <TableColumn fx:id="receiverPhone_col" prefWidth="150.0" text="Số điện thoại" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="address_col" prefWidth="200.0" text="Địa chỉ giao hàng" />
+                  <TableColumn fx:id="cost_col" prefWidth="75.0" text="Chi phí" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </center>
+   <right>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="17.0" layoutY="14.0" prefHeight="73.0" prefWidth="167.0" text="- Nhấn đúp vào đơn hàng để xem thông tin chi tiết" wrapText="true" />
+            <Label layoutX="33.0" layoutY="147.0" prefHeight="107.0" prefWidth="151.0" text="Thu nhập trong tháng 9 là 10000000 VND" wrapText="true">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </right>
+</BorderPane>
