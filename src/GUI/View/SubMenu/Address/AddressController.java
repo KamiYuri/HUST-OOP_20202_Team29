@@ -1,5 +1,7 @@
 package GUI.View.SubMenu.Address;
 
+import GUI.Controller.Controller;
+import GUI.View.MainStage.MainStageController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.Console;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -49,6 +52,8 @@ public class AddressController {
                 this.address = addressInput.getText();
                 System.out.println(address);
                 thisStage.close();
+                showResult();
+                Controller.getInstance().getMainStageController().showUndo(true);
             }else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning alert");
@@ -61,5 +66,9 @@ public class AddressController {
 
     public String getInput() {
         return address;
+    }
+
+    public void showResult() {
+        Controller.getInstance().findAddress(this.address);
     }
 }

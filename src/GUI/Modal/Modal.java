@@ -1,28 +1,27 @@
-package BackEnd;
+package GUI.Modal;
 
-import java.util.Date;
-import java.util.ArrayList;
+import GUI.Controller.Controller;
 
-public class Order {
+public class Modal {
     private String senderName, senderPhone, receiverName, receiverPhone, address, date;
     private double weight, distance, shippingCost;
     private int shipping;
 
-    public Order() {
-        this.senderName = "";
-        this.senderPhone = "";
-        this.receiverName = "";
-        this.receiverPhone = "";
-        this.address = "";
-        this.weight = 0.0;
-        this.distance = 0.0;
-        this.shippingCost = 0.0;
+    public Modal() {
+        this.senderName = " ";
+        this.senderPhone = " ";
+        this.receiverName = " ";
+        this.receiverPhone = " ";
+        this.address = " ";
+        this.weight = 0;
+        this.distance = 0;
+        this.shippingCost = 0;
         this.shipping = 0;
-        this.date = "";
+        this.date = " ";
     }
 
-    public Order(String senderName, String senderPhone, String receiverName, String receiverPhone,
-                 String address, double weight, double distance, int shipping, String date) {
+    public Modal(String senderName, String senderPhone, String receiverName, String receiverPhone,
+                 String address, double weight, double distance, double shippingCost, int shipping, String date) {
         this.senderName = senderName;
         this.senderPhone = senderPhone;
         this.receiverName = receiverName;
@@ -30,6 +29,7 @@ public class Order {
         this.address = address;
         this.weight = weight;
         this.distance = distance;
+        this.shippingCost = shippingCost;
         this.shipping = shipping;
         this.date = date;
     }
@@ -95,11 +95,11 @@ public class Order {
         return shippingCost;
     }
 
-    public void setCost(double cost) {
-        this.shippingCost = cost;
+    public void setCost(double shippingCost) {
+        this.shippingCost = shippingCost;
     }
 
-    public double getShipping() {
+    public int getShipping() {
         return shipping;
     }
 
@@ -115,6 +115,7 @@ public class Order {
         this.date = date;
     }
 //endregion
+
     public void showIn4() {
         System.out.println(getSenderName());
         System.out.println(getSenderPhone());

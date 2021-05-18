@@ -1,5 +1,6 @@
 package GUI.View.SubMenu.Month;
 
+import GUI.Controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,6 +61,9 @@ public class MonthController {
                 Node source = (Node) mouseEvent.getSource();
                 Stage thisStage = (Stage) source.getScene().getWindow();
                 thisStage.close();
+                showResult();
+                Controller.getInstance().getMainStageController().showUndo(true);
+                Controller.getInstance().getMainStageController().showIncome(getInput());
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning alert");
@@ -71,7 +75,10 @@ public class MonthController {
     }
 
     public int getInput() {
-        return monthList.indexOf(monthSelect.getValue());
+        return monthList.indexOf(monthSelect.getValue()) + 1;
+    }
+    public void showResult() {
+        Controller.getInstance().findMonth(getInput());
     }
 
 }

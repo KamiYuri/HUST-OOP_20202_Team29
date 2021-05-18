@@ -1,5 +1,6 @@
 package GUI.View.SubMenu.Cost;
 
+import GUI.Controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -44,6 +45,8 @@ public class CostController {
                 this.cost = Double.parseDouble(costInput.getText());
                 System.out.println(cost);
                 thisStage.close();
+                showResult();
+                Controller.getInstance().getMainStageController().showUndo(true);
             }else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning alert");
@@ -52,6 +55,9 @@ public class CostController {
                 alert.showAndWait();
             }
         });
+    }
+    public void showResult() {
+        Controller.getInstance().findCost(this.cost);
     }
 
 }

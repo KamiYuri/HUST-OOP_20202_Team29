@@ -1,5 +1,4 @@
-package BackEnd_Remastered;
-import java.util.ArrayList;
+package BackEnd;
 
 public class AirwayOrder extends AbsOrder {
 
@@ -14,5 +13,9 @@ public class AirwayOrder extends AbsOrder {
         super(senderName, senderPhone, receiverName, receiverPhone, address, date, weight, distance);
         shippingMethod = 1; // 1 la hang khong, 0 la duong bo.
         calculateShippingCost();
+    }
+
+    public AirwayOrder() {
+
     }
 }

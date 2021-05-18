@@ -1,7 +1,7 @@
 package GUI.View.MainStage;
 
-
-import GUI.Modal.Order;
+import GUI.Controller.Controller;
+import GUI.Modal.Modal;
 import GUI.View.OrderInformation.OrderInfHelper;
 import GUI.View.SubMenu.Address.AddressController;
 import GUI.View.SubMenu.Cost.CostController;
@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,66 +27,58 @@ public class MainStageController {
     private final Stage thisStage;
 
     @FXML
-    private TableView<Order> tableView;
+    private Pane infIncome;
 
     @FXML
-    private TableColumn<Order, Number> id_col;
+    private Label monthIncome, income;
 
     @FXML
-    private TableColumn<Order, String> senderName_col;
+    private Button undo, close;
 
     @FXML
-    private TableColumn<Order, String> senderPhone_col;
-    @FXML
-    private TableColumn<Order, String> receiverName_col;
-    @FXML
-    private TableColumn<Order, String> receiverPhone_col;
-    @FXML
-    private TableColumn<Order, String> address_col;
-    @FXML
-    private TableColumn<Order, Integer> cost_col;
+    private TableView<Modal> tableView = new TableView<>();
 
     @FXML
-    private TableRow<Order> tableRow;
+    private TableColumn<Modal, Number> id_col;
 
-    ObservableList<Order> obsList = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn<Modal, String> senderName_col;
+
+    @FXML
+    private TableColumn<Modal, String> senderPhone_col;
+    @FXML
+    private TableColumn<Modal, String> receiverName_col;
+    @FXML
+    private TableColumn<Modal, String> receiverPhone_col;
+    @FXML
+    private TableColumn<Modal, String> address_col;
+    @FXML
+    private TableColumn<Modal, Integer> cost_col;
+
+    @FXML
+    private TableRow<Modal> tableRow;
+
+    ObservableList<Modal> obsList = FXCollections.observableArrayList();
     //</editor-fold>
 
-
-    public MainStageController() {
+    public MainStageController(Modal[] modalArr) {
+        setOrderList(modalArr);
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(MainStageController.class.getResource("MainStage.fxml"));
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
             thisStage.setTitle("Quản lý đơn hàng");
+            thisStage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void showStage() {
-        thisStage.showAndWait();
-    }
-
     public void initialize() {
-        Order[] orderList = new Order[3];
-
-        orderList[0] = new Order("senderName 1", "senderPhone 1", "receiverName 1",
-                "receiverPhone 1","address 1",1,100, 1, 1, "01/11/2021");
-
-        orderList[1] = new Order("senderName 2", "senderPhone 2", "receiverName 2",
-                "receiverPhone 2","address 2",2,200, 2, 0, "02/11/2021");
-
-        orderList[2] = new Order("senderName 3", "senderPhone 3", "receiverName 3",
-                "receiverPhone 3","address 3",3,300, 3, 1, "03/11/2021");
-
-        for(int i = 0; i < 3; i++) {
-            obsList.add(orderList[i]);
-        }
-
+        tableView.setStyle( "-fx-alignment: CENTER;");
         tableView.setRowFactory(tv -> {
-            TableRow<Order> row = new TableRow<>();
+            TableRow<Modal> row = new TableRow<>();
 
             ContextMenu contextMenu = new ContextMenu();
             MenuItem removeItem = new MenuItem("Xoá");
@@ -95,11 +88,13 @@ public class MainStageController {
 
             removeItem.setOnAction(actionEvent -> {
                 obsList.remove(tv.getSelectionModel().getSelectedItem());
+                updateToController();
             });
 
             editItem.setOnAction(actionEvent -> {
-                Order tmp = tv.getSelectionModel().getSelectedItem();
+                Modal tmp = tv.getSelectionModel().getSelectedItem();
                 obsList.set(obsList.indexOf(tmp), OrderInfHelper.showOrEditOrder(tmp));
+                updateToController();
             });
 
             row.contextMenuProperty().bind(
@@ -121,7 +116,55 @@ public class MainStageController {
         tableView.setItems(obsList);
     }
 
+
+
+    private void updateToController() {
+        Controller.getInstance().updateFromUI();
+    }
+    
+    public void setOrderList(Modal[] modalArr) {
+        tableView.setItems(FXCollections.observableArrayList(modalArr));
+    }
+
+    public Modal[] getOrderList() {
+        Modal[] modalList = new Modal[obsList.size()];
+        for(int i = 0; i < obsList.size(); i++) {
+            modalList[i] = obsList.get(i);
+        }
+
+        return modalList;
+    }
+
+    public void updateFromController(){
+        this.setOrderList(Controller.getInstance().getOrderList());
+    }
+
+    public void showStage() {
+        thisStage.showAndWait();
+    }
+
     //<editor-fold desc="Phần các menu">
+
+    public void showUndo(boolean visible) {
+        this.undo.setVisible(visible);
+    }
+
+    @FXML
+    public void closeClick() {
+        this.close.setOnMouseClicked(mouseEvent -> {
+            thisStage.close();
+        });
+    }
+    
+    @FXML
+    public void undoClick() {
+        this.undo.setOnMouseClicked(mouseEvent -> {
+            tableView.setItems(this.obsList);
+            this.infIncome.setVisible(false);
+            this.undo.setVisible(false);
+        });
+    }
+
     //Menu thêm đơn hàng
 
     @FXML
@@ -131,6 +174,7 @@ public class MainStageController {
     public void addClick() {
         add.setOnAction(actionEvent -> {
             obsList.add(OrderInfHelper.makeNewOrder());
+            updateToController();
         });
     }
 
@@ -184,6 +228,12 @@ public class MainStageController {
                 monthController.showStage();
             }
         );
+    }
+
+    public void showIncome(int month) {
+        this.infIncome.setVisible(true);
+        this.monthIncome.setText(Integer.toString(month));
+        this.income.setText(Controller.getInstance().getIncomeInMonth(month));
     }
     //</editor-fold>
 }

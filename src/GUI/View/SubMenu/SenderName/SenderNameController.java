@@ -1,5 +1,6 @@
 package GUI.View.SubMenu.SenderName;
 
+import GUI.Controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -50,6 +51,8 @@ public class SenderNameController {
                 this.name = textInput.getText();
                 System.out.println(name);
                 thisStage.close();
+                showResult();
+                Controller.getInstance().getMainStageController().showUndo(true);
             }else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning alert");
@@ -62,5 +65,8 @@ public class SenderNameController {
 
     public String getInput() {
         return name;
+    }
+    public void showResult() {
+        Controller.getInstance().findAddress(this.name);
     }
 }
