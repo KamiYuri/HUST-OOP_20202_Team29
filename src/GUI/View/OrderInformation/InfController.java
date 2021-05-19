@@ -5,6 +5,8 @@ import GUI.Modal.Modal;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,6 +22,8 @@ import javafx.util.converter.LocalDateStringConverter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class InfController {
     private boolean NEW_ORDER = true;
@@ -98,7 +102,26 @@ public class InfController {
     }
 
     public void initialize() {
-        bindData();
+
+        Pattern pattern_num = Pattern.compile("\\d{0,11}");
+
+        senderPhoneInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
+        receiverPhoneInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
+        weightInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
+        distanceInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
+
+        Pattern pattern_name = Pattern.compile("^[a-zA-Z]+");
+
+        senderNameInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            return pattern_name.matcher(change.getControlNewText()).matches() ? change : null; }));
+
+
+
+                bindData();
         wayInput.setItems(this.wayList);
 
         if(NEW_ORDER){

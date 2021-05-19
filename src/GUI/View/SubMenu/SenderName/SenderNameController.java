@@ -67,6 +67,6 @@ public class SenderNameController {
         return name;
     }
     public void showResult() {
-        Controller.getInstance().findAddress(this.name);
+        Controller.getInstance().findName(this.name);
     }
 }

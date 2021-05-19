@@ -1,6 +1,5 @@
 package BackEnd;
 
-
 import GUI.Modal.Modal;
 
 import java.util.ArrayList;
@@ -8,6 +7,7 @@ import java.util.ArrayList;
 public class Management {
     private ArrayList<AbsOrder> OrderList = new ArrayList<>(); // luu tru order.
 
+    //<editor-fold desc="Make Singleton">
     private Management() {
 
     }
@@ -19,6 +19,10 @@ public class Management {
     public static Management getInstance() {
         return ManegementHelper.INSTANCE;
     }
+    //</editor-fold>
+
+    //<editor-fold desc="Modify data">
+    /** Polymorphism */
 
     public AbsOrder convertToOrder(Modal modal) {
         AbsOrder absOrder = new AirwayOrder();
@@ -55,6 +59,7 @@ public class Management {
         }
         return modals;
     }
+    //</editor-fold>
 
     public void addOrder(AbsOrder absOrder) {
         OrderList.add(absOrder);
@@ -70,29 +75,6 @@ public class Management {
     public double calcCost(Modal modal) {
         return convertToModal(convertToOrder(modal)).getCost();
     }
-
-//    //flag nhan tin hieu 0-1 tu nut chon kieu van chuyen trong GUI.
-//    public static AbsOrder CreateOrder(int flag, String senderName, String senderPhone, String receiverName,
-//                                       String receiverPhone, String address, String date, double weight, double distance){
-//
-//        AbsOrder newOrder;
-//        if(flag == 0){
-//            newOrder = new RoadOrder(senderName, senderPhone, receiverName, receiverPhone, address, date, weight, distance);
-//        }
-//        else {
-//           newOrder = new AirwayOrder(senderName, senderPhone, receiverName, receiverPhone, address, date, weight, distance);
-//        }
-//        return newOrder;
-//    }
-
-//    //submit thi goi ham Create va AddOrder de tao va them Modal vao danh sach.
-//    public static void AddOrder (AbsOrder order){
-//        OrderList.add(order);
-//    }
-//
-//    public static void DeleteOrder (AbsOrder order){
-//        OrderList.remove(order);
-//    }
 
     //Thong ke cac Modal trong 1 thang ra 1 Arraytlist.
     public  Modal[] OrdersInAmonth(int month){
@@ -136,6 +118,8 @@ public class Management {
             if(o.getSenderName().contains(name))
                 nameList.add(o);
         }
+        if(nameList.isEmpty())
+            return null;
         return convertToModal(nameList);
     }
 
@@ -166,17 +150,4 @@ public class Management {
             return null;
         return convertToModal(addList);
     }
-
-//    //ham sua don hang.
-//    public static void ModifyOrder(AbsOrder order,int flag, String senderName, String senderPhone, String receiverName,
-//                                       String receiverPhone, String address, String date, double weight, double distance ){
-//        //Tao 1 order moi voi tham so duoc chinh sua
-//        AbsOrder newOrder = CreateOrder(flag, senderName, senderPhone, receiverName, receiverPhone, address, date, weight, distance);
-//
-//        // Them Modal moi vao danh sach
-//        AddOrder(newOrder);
-//        //Xoa order cu.
-//        DeleteOrder(order);
-//    }
-
 }
