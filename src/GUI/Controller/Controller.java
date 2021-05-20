@@ -1,7 +1,7 @@
 package GUI.Controller;
 
 import BackEnd.Management;
-import GUI.Modal.Modal;
+import GUI.Modal.Model;
 import GUI.View.MainStage.MainStageController;
 
 import javafx.collections.FXCollections;
@@ -10,10 +10,10 @@ import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 
 public class Controller {
-    private Modal[] modalList, save;
+    private Model[] modelList, save;
 
     private Alert alert;
-    private ObservableList<Modal> obsModalList;
+    private ObservableList<Model> obsModelList;
 
     public MainStageController getMainStageController() {
         return mainStageController;
@@ -21,22 +21,12 @@ public class Controller {
 
     private MainStageController mainStageController;
 
-    private String addressToFind;
-    public String getAddressToFind() {
-        return addressToFind;
-    }
-
-    public void setAddressToFind(String addressToFind) {
-        this.addressToFind = addressToFind;
-    }
-
-
     private Controller(){
         initAlert();
     }
 
-    public double calcCost(Modal modal) {
-        return Management.getInstance().calcCost(modal);
+    public double calcCost(Model model) {
+        return Management.getInstance().calcCost(model);
     }
 
     public void initAlert() {
@@ -51,54 +41,50 @@ public class Controller {
         this.alert.showAndWait();
     }
 
-    public void closeAlert() {
-        this.alert.close();
-    }
-
     public void findAddress(String address) {
-        Modal[] result = Management.getInstance().SearchByAddress(address);
+        Model[] result = Management.getInstance().SearchByAddress(address);
         if(result == null) {
             showAlert("Không tìm thấy đơn hàng hoặc đơn hàng không tồn tại.");
         }
         else{
-            this.save = this.modalList;
-            this.modalList = result;
+            this.save = this.modelList;
+            this.modelList = result;
             mainStageController.setOrderList(result);
         }
     }
 
     public void findName(String name) {
-        Modal[] result = Management.getInstance().SearchOrder(name);
+        Model[] result = Management.getInstance().SearchOrder(name);
         if(result == null) {
             showAlert("Không tìm thấy đơn hàng hoặc đơn hàng không tồn tại.");
         }
         else{
-            this.save = this.modalList;
-            this.modalList = result;
+            this.save = this.modelList;
+            this.modelList = result;
             mainStageController.setOrderList(result);
         }
     }
 
     public void findCost(double cost) {
-        Modal[] result = Management.getInstance().SearchOrder(cost);
+        Model[] result = Management.getInstance().SearchOrder(cost);
         if(result == null) {
             showAlert("Không tìm thấy đơn hàng hoặc đơn hàng không tồn tại.");
         }
         else{
-            this.save = this.modalList;
-            this.modalList = result;
+            this.save = this.modelList;
+            this.modelList = result;
             mainStageController.setOrderList(result);
         }
     }
 
     public void findMonth(int month) {
-        Modal[] result = Management.getInstance().OrdersInAmonth(month);
+        Model[] result = Management.getInstance().OrdersInAmonth(month);
         if(result == null) {
             showAlert("Không tìm thấy đơn hàng nào trong tháng");
         }
         else{
-            this.save = this.modalList;
-            this.modalList = result;
+            this.save = this.modelList;
+            this.modelList = result;
             mainStageController.setOrderList(result);
         }
     }
@@ -107,6 +93,13 @@ public class Controller {
         return Double.toString(Management.getInstance().incomeInAmonth(month));
     }
 
+    public Model[] getSave() {
+        return save;
+    }
+
+    public void setSave(Model[] save) {
+        this.save = save;
+    }
 
     private static class ControllerHelper{
         private static final Controller INSTANCE = new Controller();
@@ -116,57 +109,28 @@ public class Controller {
         return ControllerHelper.INSTANCE;
     }
 
-    private ObservableList<Modal> arrToObs(Modal[] modalList) {
-        return FXCollections.observableArrayList(modalList);
+    private ObservableList<Model> arrToObs(Model[] modelList) {
+        return FXCollections.observableArrayList(modelList);
     }
 
-    private Modal[] obsToArr(ObservableList<Modal> modalObservableList) {
-        Modal[] tmp = new Modal[obsModalList.size()];
-        for(int i = 0; i < obsModalList.size(); i++){
-            this.modalList[i] = obsModalList.get(i);
-        }
-        return tmp;
-    }
-    
-    public void updateData(Modal[] modalList){
-        setObsOrderList(arrToObs(modalList));
-        setOrderList(modalList);
+    public Model[] getOrderList() {
+        return modelList;
     }
 
-    public void updateData(ObservableList<Modal> obsModalList) {
-        setOrderList(obsToArr(obsModalList));
-        setObsOrderList(obsModalList);
-    }
-
-    public Modal[] getOrderList() {
-        return modalList;
-    }
-
-    public void setOrderList(Modal[] modalList) {
-        this.modalList = modalList;
-    }
-
-    public ObservableList<Modal> getObsOrderList() {
-        return obsModalList;
-    }
-
-    public void setObsOrderList(ObservableList<Modal> obsModalList) {
-        this.obsModalList = obsModalList;
+    public void setOrderList(Model[] modelList) {
+        this.modelList = modelList;
     }
 
     public void updateFromUI() {
         this.setOrderList(mainStageController.getOrderList());
-        for(int i = 0; i < this.modalList.length; i++) {
-            this.modalList[i].showIn4();
-        }
-        Management.getInstance().updateFromController(this.modalList);
+        Management.getInstance().updateFromController(this.modelList);
     }
 
     public void Start() {
-        if(this.modalList == null){
-            this.modalList = new Modal[0];
+        if(this.modelList == null){
+            this.modelList = new Model[0];
         }
-        mainStageController = new MainStageController(this.modalList);
+        mainStageController = new MainStageController(this.modelList);
         mainStageController.showStage();
     }
 }

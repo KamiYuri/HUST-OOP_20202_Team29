@@ -2,20 +2,20 @@
 
 package GUI.View.OrderInformation;
 
-import GUI.Modal.Modal;
+import GUI.Modal.Model;
 
 public class OrderInfHelper {
 
     private static InfController infController;
 
-    public static Modal makeNewOrder() {
+    public static Model makeNewOrder() {
         infController = new InfController();
         infController.showScene();
         return infController.getOrder();
     }
 
-    public static Modal showOrEditOrder(Modal modal) {
-        infController = new InfController(modal);
+    public static Model showOrEditOrder(Model model) {
+        infController = new InfController(model);
         infController.showScene();
         return infController.getOrder();
     }

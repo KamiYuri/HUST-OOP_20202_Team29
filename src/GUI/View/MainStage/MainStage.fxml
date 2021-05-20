@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="998.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar prefHeight="0.0" prefWidth="1226.0" BorderPane.alignment="CENTER">
         <menus>
@@ -38,10 +38,10 @@
    <right>
       <Pane prefHeight="373.0" prefWidth="217.0" BorderPane.alignment="CENTER">
          <children>
-            <Label contentDisplay="CENTER" layoutX="25.0" layoutY="26.0" prefHeight="73.0" prefWidth="167.0" text="- Nhấn chuột phải vào đơn hàng để thêm chi tiết" wrapText="true" />
+            <Label contentDisplay="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="73.0" prefWidth="217.0" text="- Nhấn chuột phải vào đơn hàng để thêm chi tiết" wrapText="true" />
             <Button fx:id="undo" layoutX="17.0" layoutY="332.0" mnemonicParsing="false" onAction="#undoClick" text="Back" visible="false" />
             <Button fx:id="close" layoutX="136.0" layoutY="332.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
-            <AnchorPane fx:id="infIncome" layoutX="-1.0" layoutY="135.0" prefHeight="138.0" prefWidth="220.0" visible="false">
+            <AnchorPane fx:id="infIncome" layoutX="-1.0" layoutY="118.0" prefHeight="138.0" prefWidth="220.0" visible="false">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="21.0" text="Thu nhập trong tháng" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
                      <font>
@@ -60,20 +60,21 @@
                   </Label>
                </children>
             </AnchorPane>
+            <Label layoutX="3.0" layoutY="73.0" prefHeight="41.0" prefWidth="212.0" text="-Khi dùng chức năng tìm kiếm hoặc thống kê, ấn nút Trở lại để tiếp tục" wrapText="true" />
          </children>
       </Pane>
    </right>
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView id="my-table" fx:id="tableView" layoutY="-1.0" prefHeight="374.0" prefWidth="735.0" stylesheets="@../style.css">
+            <TableView id="my-table" fx:id="tableView" layoutY="-1.0" prefHeight="374.0" prefWidth="781.0" stylesheets="@../style.css">
                <columns>
                   <TableColumn fx:id="id_col" editable="false" prefWidth="58.0" resizable="false" text="Thứ tự" />
                   <TableColumn fx:id="name_col" prefWidth="142.0" text="Tên người gửi" />
                   <TableColumn fx:id="address_col" prefWidth="180.0" text="Địa chỉ giao hàng" />
-                  <TableColumn fx:id="shipping_col" prefWidth="109.0" text="Cách vận chuyển" />
-                  <TableColumn fx:id="time_col" prefWidth="120.0" text="Thời gian tạo đơn" />
-                  <TableColumn fx:id="cost_col" prefWidth="129.0" text="Chi phí" />
+                  <TableColumn fx:id="shipping_col" prefWidth="149.0" text="Cách vận chuyển" />
+                  <TableColumn fx:id="date_col" prefWidth="134.0" text="Thời gian tạo đơn" />
+                  <TableColumn fx:id="cost_col" prefWidth="117.0" text="Chi phí" />
                </columns>
             </TableView>
          </children>

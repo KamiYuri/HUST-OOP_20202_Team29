@@ -1,7 +1,7 @@
 package GUI.View.MainStage;
 
 import GUI.Controller.Controller;
-import GUI.Modal.Modal;
+import GUI.Modal.Model;
 import GUI.View.OrderInformation.OrderInfHelper;
 import GUI.View.SubMenu.Address.AddressController;
 import GUI.View.SubMenu.Cost.CostController;
@@ -36,25 +36,25 @@ public class MainStageController {
     private Button undo, close;
 
     @FXML
-    private final TableView<Modal> tableView = new TableView<>();
+    private TableView<Model> tableView = new TableView<>();
 
     @FXML
-    private TableColumn<Modal, Number> id_col;
+    private TableColumn<Model, Number> id_col;
 
     @FXML
-    private TableColumn<Modal, String> name_col, address_col, shipping_col, date_col;
+    private TableColumn<Model, String> name_col, address_col, shipping_col, date_col;
     
     @FXML
-    private TableColumn<Modal, Double> cost_col;
+    private TableColumn<Model, Double> cost_col;
 
     @FXML
-    private TableRow<Modal> tableRow;
+    private TableRow<Model> tableRow;
 
-    ObservableList<Modal> obsList = FXCollections.observableArrayList();
+    ObservableList<Model> obsList = FXCollections.observableArrayList();
     //</editor-fold>
 
-    public MainStageController(Modal[] modalArr) {
-        setOrderList(modalArr);
+    public MainStageController(Model[] modelArr) {
+        setOrderList(modelArr);
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(MainStageController.class.getResource("MainStage.fxml"));
@@ -71,7 +71,7 @@ public class MainStageController {
     public void initialize() {
         tableView.setStyle( "-fx-alignment: CENTER;");
         tableView.setRowFactory(tv -> {
-            TableRow<Modal> row = new TableRow<>();
+            TableRow<Model> row = new TableRow<>();
 
             ContextMenu contextMenu = new ContextMenu();
             MenuItem removeItem = new MenuItem("Xoá");
@@ -85,7 +85,7 @@ public class MainStageController {
             });
 
             editItem.setOnAction(actionEvent -> {
-                Modal tmp = tv.getSelectionModel().getSelectedItem();
+                Model tmp = tv.getSelectionModel().getSelectedItem();
                 obsList.set(obsList.indexOf(tmp), OrderInfHelper.showOrEditOrder(tmp));
                 updateToController();
             });
@@ -100,8 +100,10 @@ public class MainStageController {
         id_col.setCellValueFactory(column -> new ReadOnlyObjectWrapper<>(tableView.getItems().indexOf(column.getValue()) + 1));
         name_col.setCellValueFactory(new PropertyValueFactory<>("senderName"));
         address_col.setCellValueFactory(new PropertyValueFactory<>("address"));
-        shipping_col.setCellValueFactory(new PropertyValueFactory<>("shipping"));
+        shipping_col.setCellValueFactory(new PropertyValueFactory<>("shippingProperty"));
+        date_col.setCellValueFactory(new PropertyValueFactory<>("date"));
         cost_col.setCellValueFactory(new PropertyValueFactory<>("cost"));
+
         tableView.setItems(obsList);
     }
 
@@ -111,17 +113,17 @@ public class MainStageController {
         Controller.getInstance().updateFromUI();
     }
     
-    public void setOrderList(Modal[] modalArr) {
-        tableView.setItems(FXCollections.observableArrayList(modalArr));
+    public void setOrderList(Model[] modelArr) {
+        tableView.setItems(FXCollections.observableArrayList(modelArr));
     }
 
-    public Modal[] getOrderList() {
-        Modal[] modalList = new Modal[obsList.size()];
+    public Model[] getOrderList() {
+        Model[] modelList = new Model[obsList.size()];
         for(int i = 0; i < obsList.size(); i++) {
-            modalList[i] = obsList.get(i);
+            modelList[i] = obsList.get(i);
         }
 
-        return modalList;
+        return modelList;
     }
 
     public void updateFromController(){
@@ -160,7 +162,7 @@ public class MainStageController {
     @FXML
     public void addClick() {
         add.setOnMouseClicked(mouseEvent -> {
-            Modal tmp = OrderInfHelper.makeNewOrder();
+            Model tmp = OrderInfHelper.makeNewOrder();
             if(tmp != null){
                 obsList.add(tmp);
                 updateToController();

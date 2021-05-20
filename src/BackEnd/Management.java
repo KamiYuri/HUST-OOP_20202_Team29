@@ -1,6 +1,6 @@
 package BackEnd;
 
-import GUI.Modal.Modal;
+import GUI.Modal.Model;
 
 import java.util.ArrayList;
 
@@ -24,40 +24,40 @@ public class Management {
     //<editor-fold desc="Modify data">
     /** Polymorphism */
 
-    public AbsOrder convertToOrder(Modal modal) {
+    public AbsOrder convertToOrder(Model model) {
         AbsOrder absOrder = new AirwayOrder();
 
-        if(modal.getShipping() == 0) {
-            absOrder = new RoadOrder(modal.getSenderName(), modal.getSenderPhone(), modal.getReceiverName(), modal.getReceiverPhone(),
-                    modal.getAddress(), modal.getDate(), modal.getWeight(), modal.getDistance());
+        if(model.getShipping() == 0) {
+            absOrder = new RoadOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
+                    model.getAddress(), model.getDate(), model.getWeight(), model.getDistance());
         }
-        else if(modal.getShipping() == 1) {
-            absOrder = new AirwayOrder(modal.getSenderName(), modal.getSenderPhone(), modal.getReceiverName(), modal.getReceiverPhone(),
-                    modal.getAddress(), modal.getDate(), modal.getWeight(), modal.getDistance());
+        else if(model.getShipping() == 1) {
+            absOrder = new AirwayOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
+                    model.getAddress(), model.getDate(), model.getWeight(), model.getDistance());
         }
         return absOrder;
     }
 
-    public ArrayList<AbsOrder> convertToOrder(Modal[] modals) {
+    public ArrayList<AbsOrder> convertToOrder(Model[] models) {
         ArrayList<AbsOrder> orders = new ArrayList<>();
-        for(int i = 0; i < modals.length; i++) {
-            orders.add(convertToOrder(modals[i]));
+        for(int i = 0; i < models.length; i++) {
+            orders.add(convertToOrder(models[i]));
         }
         return orders;
     }
 
-    public Modal convertToModal(AbsOrder absOrder) {
-        return new Modal(absOrder.getSenderName(), absOrder.getSenderPhone(), absOrder.getReceiverName(),
+    public Model convertToModal(AbsOrder absOrder) {
+        return new Model(absOrder.getSenderName(), absOrder.getSenderPhone(), absOrder.getReceiverName(),
                 absOrder.receiverPhone, absOrder.address, absOrder.weight, absOrder.getDistance(),
                 absOrder.getShippingCost(), absOrder.getShippingMethod(), absOrder.getDate());
     }
 
-    public Modal[] convertToModal(ArrayList<AbsOrder> absOrders) {
-        Modal[] modals = new Modal[absOrders.size()];
+    public Model[] convertToModal(ArrayList<AbsOrder> absOrders) {
+        Model[] models = new Model[absOrders.size()];
         for(int i = 0; i < absOrders.size(); i++) {
-            modals[i] = convertToModal(absOrders.get(i));
+            models[i] = convertToModal(absOrders.get(i));
         }
-        return modals;
+        return models;
     }
     //</editor-fold>
 
@@ -65,19 +65,19 @@ public class Management {
         OrderList.add(absOrder);
     }
 
-    public void updateFromController(Modal[] modal) {
+    public void updateFromController(Model[] model) {
         this.OrderList = new ArrayList<>();
-        for(Modal o : modal) {
+        for(Model o : model) {
             addOrder(convertToOrder(o));
         }
     }
 
-    public double calcCost(Modal modal) {
-        return convertToModal(convertToOrder(modal)).getCost();
+    public double calcCost(Model model) {
+        return convertToModal(convertToOrder(model)).getCost();
     }
 
-    //Thong ke cac Modal trong 1 thang ra 1 Arraytlist.
-    public  Modal[] OrdersInAmonth(int month){
+    //Thong ke cac Model trong 1 thang ra 1 Arraytlist.
+    public  Model[] OrdersInAmonth(int month){
         ArrayList<AbsOrder> list = new ArrayList<>();
         String Month;
 
@@ -111,7 +111,7 @@ public class Management {
     }
 
     // tim kiem don hang theo nguoi gui
-    public Modal[] SearchOrder(String name){
+    public Model[] SearchOrder(String name){
         ArrayList<AbsOrder> nameList = new ArrayList<>();
 
         for (AbsOrder o : OrderList){
@@ -124,7 +124,7 @@ public class Management {
     }
 
     // Tim kiem don hang co chi phi lon hon 1 so nhap vao
-    public Modal[] SearchOrder(double shippingCost){
+    public Model[] SearchOrder(double shippingCost){
         ArrayList<AbsOrder> costList = new ArrayList<>();
 
         for (AbsOrder o : OrderList){
@@ -136,7 +136,7 @@ public class Management {
     }
 
     //tim kiem don hang theo dia chi
-    public Modal[] SearchByAddress(String address){
+    public Model[] SearchByAddress(String address){
 
 
         ArrayList<AbsOrder> addList = new ArrayList<>();

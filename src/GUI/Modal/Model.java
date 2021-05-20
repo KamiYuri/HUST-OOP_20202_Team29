@@ -1,13 +1,29 @@
 package GUI.Modal;
 
 import GUI.Controller.Controller;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-public class Modal {
+public class Model {
     private String senderName, senderPhone, receiverName, receiverPhone, address, date;
     private double weight, distance, shippingCost;
     private int shipping;
+    private String shippingProperty;
 
-    public Modal() {
+    public String getShippingProperty() {
+        return shippingProperty;
+    }
+
+    public void setShippingProperty(int num) {
+        this.shippingProperty = shippingList.get(num);
+    }
+
+
+    ObservableList<String> shippingList = FXCollections
+            .observableArrayList("Đường bộ", "Đường hàng không");
+
+    public Model() {
         this.senderName = " ";
         this.senderPhone = " ";
         this.receiverName = " ";
@@ -17,10 +33,11 @@ public class Modal {
         this.distance = 0;
         this.shippingCost = 0;
         this.shipping = 0;
+        this.shippingProperty = shippingList.get(shipping);
         this.date = " ";
     }
 
-    public Modal(String senderName, String senderPhone, String receiverName, String receiverPhone,
+    public Model(String senderName, String senderPhone, String receiverName, String receiverPhone,
                  String address, double weight, double distance, double shippingCost, int shipping, String date) {
         this.senderName = senderName;
         this.senderPhone = senderPhone;
@@ -31,6 +48,7 @@ public class Modal {
         this.distance = distance;
         this.shippingCost = shippingCost;
         this.shipping = shipping;
+        this.shippingProperty = shippingList.get(shipping);
         this.date = date;
     }
 

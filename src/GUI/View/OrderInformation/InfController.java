@@ -1,7 +1,7 @@
 package GUI.View.OrderInformation;
 
 import GUI.Controller.Controller;
-import GUI.Modal.Modal;
+import GUI.Modal.Model;
 
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
@@ -41,7 +41,7 @@ public class InfController {
     @FXML
     private final ObservableList<String> wayList = FXCollections.observableArrayList("Đường bộ", "Đường hàng không");
 
-    private Modal modal;
+    private Model model;
     private static boolean submitFlag = false;
 
     private Label[] getLabels() {
@@ -78,14 +78,14 @@ public class InfController {
 
     //Contructor dùng khi muốn tạo mới đơn hàng
     public InfController() {
-        this.modal = new Modal();
+        this.model = new Model();
         setStage();
     }
 
     //Contructor dùng khi muốn hiện thị và chỉnh sửa 1 đơn hàng đã tồn tại
-    public InfController(Modal modal) {
+    public InfController(Model model) {
         NEW_ORDER = false;
-        this.modal = modal;
+        this.model = model;
         setStage();
     }
 
@@ -100,17 +100,14 @@ public class InfController {
             e.printStackTrace();
         }
     }
-//
-//    1-999, 0.001 - 998.999
-//            ^\d*\.?\d*$
 
     public void initialize() {
-//        thisStage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, windowEvent -> {
-//            if(!submitFlag){
-//                this.modal = null;
-//            }
-//        });
-        
+        thisStage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, windowEvent -> {
+            if(!submitFlag){
+                this.model = null;
+            }
+        });
+
         senderNameInput.setTextFormatter(getFomatter("^[\\p{L} ]{0,20}+(\\s[\\p{L} ]+)?$"));
         receiverNameInput.setTextFormatter(getFomatter("^[\\p{L} ]{0,20}+(\\s[\\p{L} ]+)?$"));
         senderPhoneInput.setTextFormatter(getFomatter("\\d{0,11}"));
@@ -136,16 +133,16 @@ public class InfController {
             dateInput.setValue(LocalDate.now());
         }
         else {
-            senderNameInput.setText(this.modal.getSenderName());
-            senderPhoneInput.setText(this.modal.getSenderPhone());
-            receiverNameInput.setText(this.modal.getReceiverName());
-            receiverPhoneInput.setText(this.modal.getReceiverPhone());
-            addressInput.setText(this.modal.getAddress());
-            weightInput.setText(Double.toString(this.modal.getWeight()));
-            distanceInput.setText(Double.toString(this.modal.getDistance()));
-            wayInput.setValue(wayList.get(this.modal.getShipping()));
-            cost.setText(Double.toString(this.modal.getCost()));
-            dateInput.setValue(convertStringToDate(this.modal.getDate()));
+            senderNameInput.setText(this.model.getSenderName());
+            senderPhoneInput.setText(this.model.getSenderPhone());
+            receiverNameInput.setText(this.model.getReceiverName());
+            receiverPhoneInput.setText(this.model.getReceiverPhone());
+            addressInput.setText(this.model.getAddress());
+            weightInput.setText(Double.toString(this.model.getWeight()));
+            distanceInput.setText(Double.toString(this.model.getDistance()));
+            wayInput.setValue(wayList.get(this.model.getShipping()));
+            cost.setText(Double.toString(this.model.getCost()));
+            dateInput.setValue(convertStringToDate(this.model.getDate()));
         }
     }
 
@@ -156,12 +153,12 @@ public class InfController {
             return pattern.matcher(change.getControlNewText()).matches() ? change : null;});
     }
 
-    public void setOrder(Modal modal) {
-        this.modal = modal;
+    public void setOrder(Model model) {
+        this.model = model;
     }
 
-    public Modal getOrder() {
-        return modal;
+    public Model getOrder() {
+        return model;
     }
 
     public void showScene() {
@@ -200,8 +197,6 @@ public class InfController {
         this.weightInput.setVisible(visible);
         this.distanceInput.setText(this.distance.getText());
         this.distanceInput.setVisible(visible);
-
-//        this.dateInput.setValue(this.convertStringToDate());
         this.dateInput.setVisible(visible);
         this.wayInput.setVisible(visible);
     }
@@ -209,7 +204,6 @@ public class InfController {
     @FXML
     public void editClick() {
         this.edit.setOnMouseClicked(mouseEvent -> {
-            System.out.println("edit clicked");
             swapScene(SCENE.EDIT);
         });
     }
@@ -220,32 +214,31 @@ public class InfController {
             if(isInputNull()){
                 submitFlag = true;
                 update();
-//                cost.setText(Double.toString(this.modal.getCost()));
                 swapScene(SCENE.SHOW);
             }
         });
     }
 
     public void update() {
-        modal.setSenderName(senderNameInput.getText());
-        modal.setSenderPhone(senderPhoneInput.getText());
-        modal.setReceiverName(receiverNameInput.getText());
-        modal.setReceiverPhone(receiverPhoneInput.getText());
-        modal.setAddress(addressInput.getText());
-        modal.setWeight(Double.parseDouble(weightInput.getText()));
-        modal.setDistance(Double.parseDouble(distanceInput.getText()));
-        modal.setShipping(wayList.indexOf(wayInput.getValue()));
-        modal.setDate(convertDateToString(dateInput.getValue()));
-        modal.setCost(Controller.getInstance().calcCost(this.modal));
-        costInput.setText(Double.toString(modal.getCost()));
+        model.setSenderName(senderNameInput.getText());
+        model.setSenderPhone(senderPhoneInput.getText());
+        model.setReceiverName(receiverNameInput.getText());
+        model.setReceiverPhone(receiverPhoneInput.getText());
+        model.setAddress(addressInput.getText());
+        model.setWeight(Double.parseDouble(weightInput.getText()));
+        model.setDistance(Double.parseDouble(distanceInput.getText()));
+        model.setShipping(wayList.indexOf(wayInput.getValue()));
+        model.setDate(convertDateToString(dateInput.getValue()));
+        model.setCost(Controller.getInstance().calcCost(this.model));
+        model.setShippingProperty(model.getShipping());
+        costInput.setText(Double.toString(model.getCost()));
     }
 
     @FXML
     public void doneClick() {
         this.done.setOnMouseClicked(mouseEvent -> {
-            System.out.println("done clicked");
+            submitFlag = false;
             update();
-            this.modal.showIn4();
             this.thisStage.close();
         });
     }
@@ -259,9 +252,7 @@ public class InfController {
         weightInput.textProperty().bindBidirectional(weight.textProperty());
         distanceInput.textProperty().bindBidirectional(distance.textProperty());
         costInput.textProperty().bindBidirectional(cost.textProperty());
-
         Bindings.bindBidirectional(date.textProperty(), dateInput.valueProperty(), new LocalDateStringConverter(DateTimeFormatter.ofPattern("dd/MM/yyyy"), null));
-
         way.textProperty().bind(wayInput.valueProperty());
 
     }

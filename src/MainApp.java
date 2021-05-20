@@ -1,5 +1,4 @@
 import GUI.Controller.Controller;
-import GUI.Modal.Modal;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
