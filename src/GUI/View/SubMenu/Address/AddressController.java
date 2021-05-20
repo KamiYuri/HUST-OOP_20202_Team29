@@ -1,19 +1,22 @@
 package GUI.View.SubMenu.Address;
 
 import GUI.Controller.Controller;
-import GUI.View.MainStage.MainStageController;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.Console;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class AddressController {
     private String address;
@@ -31,6 +34,8 @@ public class AddressController {
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
             thisStage.setTitle("Tìm kiếm theo địa chỉ");
+            thisStage.getIcons().add(new Image("icons/add.png"));
+            thisStage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -40,7 +45,7 @@ public class AddressController {
         thisStage.initModality(Modality.APPLICATION_MODAL);
         thisStage.showAndWait();
     }
-
+                                                  
     public void initialize() {
         addressInput.setText("");
     }
@@ -48,7 +53,7 @@ public class AddressController {
     @FXML
     public void submitClick() {
         this.submit.setOnMouseClicked(mouseEvent -> {
-            if (addressInput.getText() != "") {
+            if (!addressInput.getText().equals("")) {
                 this.address = addressInput.getText();
                 System.out.println(address);
                 thisStage.close();

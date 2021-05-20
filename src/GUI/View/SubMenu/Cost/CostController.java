@@ -7,11 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class CostController {
     private double cost;
@@ -29,9 +33,18 @@ public class CostController {
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
             thisStage.setTitle("Tìm kiếm theo chi phí");
+            thisStage.getIcons().add(new Image("icons/cost1.png"));
+            thisStage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void initialize() {
+        costInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            Pattern pattern = Pattern.compile("\\d{0,11}");
+            return pattern.matcher(change.getControlNewText()).matches() ? change : null;
+        }));
     }
 
     public void showStage() {

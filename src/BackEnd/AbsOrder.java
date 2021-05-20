@@ -1,5 +1,6 @@
 package BackEnd;
 
+@SuppressWarnings("ALL")
 abstract public class AbsOrder {
     //Attribute
     protected String senderName;
@@ -75,19 +76,5 @@ abstract public class AbsOrder {
 
     // Abs Method
     protected abstract void calculateShippingCost();
-
-    //Method
-    public void printInfo(){
-        System.out.println(getSenderName());
-        System.out.println(getSenderPhone());
-        System.out.println(getReceiverName());
-        System.out.println(getReceiverPhone());
-        System.out.println(getAddress());
-        System.out.println(getWeight());
-        System.out.println(getDistance());
-        System.out.println(getShippingCost());
-        System.out.println(getShippingMethod());
-        System.out.println(getDate());
-    }
 
 }

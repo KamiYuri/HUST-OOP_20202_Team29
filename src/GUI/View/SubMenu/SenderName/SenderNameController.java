@@ -7,11 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 public class SenderNameController {
 
@@ -29,7 +33,9 @@ public class SenderNameController {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(SenderNameController.class.getResource("SenderName.FXML")));
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
-            thisStage.setTitle("Tìm kiếm theo tên khách hàng");
+            thisStage.setTitle("Tìm kiếm theo tên người gửi");
+            thisStage.getIcons().add(new Image("icons/name1.png"));
+            thisStage.setResizable(false);
         } catch(IOException e){
             e.printStackTrace();
         }
@@ -42,6 +48,10 @@ public class SenderNameController {
 
     public void initialize() {
         textInput.setText("");
+        textInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            Pattern pattern = Pattern.compile("^[\\p{L} ]{0,20}+(\\s[\\p{L} ]+)?$");
+            return pattern.matcher(change.getControlNewText()).matches() ? change : null;
+        }));
     }
 
     @FXML

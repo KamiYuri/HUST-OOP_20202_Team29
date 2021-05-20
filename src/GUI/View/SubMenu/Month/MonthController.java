@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -38,6 +39,8 @@ public class MonthController {
             loader.setController(this);
             thisStage.setScene(new Scene(loader.load()));
             thisStage.setTitle("Thống kê theo tháng");
+            thisStage.getIcons().add(new Image("icons/static.png"));
+            thisStage.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
         }

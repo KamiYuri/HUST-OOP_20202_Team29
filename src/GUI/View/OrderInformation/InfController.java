@@ -1,3 +1,7 @@
+//Hoàng Việt Dũng
+
+//Lớp quản lý cửa sở tạo mới hoặc đọc đơn hàng
+
 package GUI.View.OrderInformation;
 
 import GUI.Controller.Controller;
@@ -11,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,7 +40,7 @@ public class InfController {
     @FXML
     private TextField senderNameInput, senderPhoneInput, receiverNameInput, receiverPhoneInput, addressInput, weightInput, distanceInput, costInput;
     @FXML
-    private ChoiceBox wayInput;
+    private ChoiceBox<String> wayInput;
     @FXML
     private DatePicker dateInput;
     @FXML
@@ -75,7 +80,6 @@ public class InfController {
         SHOW
     }
 
-
     //Contructor dùng khi muốn tạo mới đơn hàng
     public InfController() {
         this.model = new Model();
@@ -96,6 +100,8 @@ public class InfController {
             thisStage.setScene(new Scene(loader.load()));
             thisStage.initModality(Modality.APPLICATION_MODAL);
             thisStage.setResizable(false);
+            thisStage.setTitle("Thông tin chi tiết đơn hàng");
+            thisStage.getIcons().add(new Image("icons/inf.png"));
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -146,15 +152,11 @@ public class InfController {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private TextFormatter getFomatter(String string) {
         Pattern pattern = Pattern.compile(string);
 
-        return new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
-            return pattern.matcher(change.getControlNewText()).matches() ? change : null;});
-    }
-
-    public void setOrder(Model model) {
-        this.model = model;
+        return new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> pattern.matcher(change.getControlNewText()).matches() ? change : null);
     }
 
     public Model getOrder() {
@@ -203,9 +205,7 @@ public class InfController {
 
     @FXML
     public void editClick() {
-        this.edit.setOnMouseClicked(mouseEvent -> {
-            swapScene(SCENE.EDIT);
-        });
+        this.edit.setOnMouseClicked(mouseEvent -> swapScene(SCENE.EDIT));
     }
 
     @FXML
@@ -273,7 +273,7 @@ public class InfController {
     }
 
     private boolean isInputNull() {
-        Boolean flag = true;
+        boolean flag = true;
         if(dateInput.getValue().equals(LocalDate.now())) {
             changeColor(dateInput, Color.YELLOW);
             warningDateLabel.setVisible(true);
@@ -294,7 +294,6 @@ public class InfController {
         }
         return flag;
     }
-
 
     private LocalDate convertStringToDate(String string) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

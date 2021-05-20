@@ -1,3 +1,7 @@
+//Hoàng Việt Dũng
+
+//Lớp điều khiển cửa sổ chính của chương trình
+
 package GUI.View.MainStage;
 
 import GUI.Controller.Controller;
@@ -16,11 +20,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+@SuppressWarnings("ALL")
 public class MainStageController {
 
     //<editor-fold desc="Var">
@@ -62,6 +68,7 @@ public class MainStageController {
             thisStage.setScene(new Scene(loader.load()));
             thisStage.setTitle("Quản lý đơn hàng");
             thisStage.setResizable(false);
+            thisStage.getIcons().add(new Image("icons/icon.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -122,10 +129,6 @@ public class MainStageController {
         }
 
         return modelList;
-    }
-
-    public void updateFromController(){
-        this.setOrderList(Controller.getInstance().getOrderList());
     }
 
     public void showStage() {
