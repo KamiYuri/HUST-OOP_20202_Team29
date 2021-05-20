@@ -1,3 +1,7 @@
+//Nguyễn Hải Anh
+
+//Lớp thực hiện các chức năng chính của chương trình
+
 package BackEnd;
 
 import GUI.Modal.Model;
@@ -29,8 +33,10 @@ public class Management {
             return new RoadOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
                     model.getAddress(), model.getDate(), model.getWeight(), model.getDistance());
         }
-        return new AirwayOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
+        else {
+            return new AirwayOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
                     model.getAddress(), model.getDate(), model.getWeight(), model.getDistance());
+        }
     }
 
     public ArrayList<AbsOrder> convertToOrder(Model[] models) {

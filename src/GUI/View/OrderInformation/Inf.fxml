@@ -223,17 +223,17 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="edit" layoutX="142.0" layoutY="7.0" mnemonicParsing="false" onAction="#editClick" text="Edit" />
+                  <Button fx:id="edit" layoutX="121.0" layoutY="7.0" mnemonicParsing="false" onAction="#editClick" text="Chỉnh sửa" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="submit" layoutX="68.0" layoutY="7.0" mnemonicParsing="false" onAction="#submitClick" text="Submit" visible="false" />
+                  <Button fx:id="submit" layoutX="68.0" layoutY="7.0" mnemonicParsing="false" onAction="#submitClick" text="Hoàn tất" visible="false" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Button fx:id="done" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#doneClick" text="Done" />
+                  <Button fx:id="done" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#doneClick" text="Đóng" />
                </children>
             </Pane>
          </children>

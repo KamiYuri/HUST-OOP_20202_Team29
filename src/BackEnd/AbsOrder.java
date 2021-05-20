@@ -1,3 +1,7 @@
+//Nguyễn Hải Anh
+
+//Lớp ảo định nghĩa một đơn hàng
+
 package BackEnd;
 
 @SuppressWarnings("ALL")

@@ -1,3 +1,7 @@
+//Hoàng Việt Dũng
+
+//Điều khiển cửa sổ nhận thông tin thống kê theo Tháng
+
 package GUI.View.SubMenu.Month;
 
 import GUI.Controller.Controller;

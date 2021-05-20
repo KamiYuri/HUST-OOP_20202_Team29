@@ -1,3 +1,8 @@
+//Hoàng Việt Dũng
+
+//Điều khiển cửa sổ nhận thông tin tìm kiếm theo Địa chỉ
+
+
 package GUI.View.SubMenu.Address;
 
 import GUI.Controller.Controller;

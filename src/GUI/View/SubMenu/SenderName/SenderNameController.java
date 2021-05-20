@@ -1,3 +1,8 @@
+//Hoàng Việt Dũng
+//Nguyễn Việt Tùng
+
+//Điều khiển cửa sổ nhận thông tin tìm kiếm theo Tên người gửi
+
 package GUI.View.SubMenu.SenderName;
 
 import GUI.Controller.Controller;

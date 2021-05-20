@@ -1,3 +1,7 @@
+//Nguyễn Hải Anh
+
+//Lớp định nghĩa đơn hàng Hàng không
+
 package BackEnd;
 
 public class AirwayOrder extends AbsOrder {
@@ -19,6 +23,5 @@ public class AirwayOrder extends AbsOrder {
     }
 
     public AirwayOrder() {
-
     }
 }

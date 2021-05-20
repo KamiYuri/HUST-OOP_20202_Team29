@@ -1,3 +1,8 @@
+//Hoàng Việt Dũng
+//Nguyễn Việt Tùng
+
+//Điều khiển cửa sổ nhận thông tin tìm kiếm theo Giá tiền
+
 package GUI.View.SubMenu.Cost;
 
 import GUI.Controller.Controller;
@@ -42,7 +47,7 @@ public class CostController {
 
     public void initialize() {
         costInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
-            Pattern pattern = Pattern.compile("\\d{0,11}");
+            Pattern pattern = Pattern.compile("\\d{0,7}");
             return pattern.matcher(change.getControlNewText()).matches() ? change : null;
         }));
     }

@@ -1,3 +1,7 @@
+//Hoàng Việt Dũng
+
+//Class khởi chạy Cửa sổ chính của chương trình
+
 import GUI.Controller.Controller;
 
 import javafx.application.Application;

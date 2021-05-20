@@ -1,4 +1,5 @@
 //Hoàng Việt Dũng
+//Nguyễn Việt Tùng
 
 //Lớp quản lý cửa sở tạo mới hoặc đọc đơn hàng
 
@@ -156,7 +157,8 @@ public class InfController {
     private TextFormatter getFomatter(String string) {
         Pattern pattern = Pattern.compile(string);
 
-        return new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> pattern.matcher(change.getControlNewText()).matches() ? change : null);
+        return new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> pattern
+                .matcher(change.getControlNewText()).matches() ? change : null);
     }
 
     public Model getOrder() {
