@@ -5,6 +5,9 @@ public class RoadOrder extends AbsOrder {
     @Override
     protected void calculateShippingCost() {
         this.shippingCost = distance*20000 + weight*5000;
+        if(shippingCost >= 10000000) {
+            shippingCost = 9999999;
+        }
     }
 
     //Constructor

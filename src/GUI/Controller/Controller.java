@@ -1,14 +1,19 @@
+//Hoàng Việt Dũng
+
+//Class quản lý việc trao đổi dữ liệu giữa UI và Back-end
+
 package GUI.Controller;
 
 import BackEnd.Management;
+
 import GUI.Modal.Model;
 import GUI.View.MainStage.MainStageController;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 
+@SuppressWarnings("ALL")
 public class Controller {
     private Model[] modelList, save;
 
@@ -21,13 +26,19 @@ public class Controller {
 
     private MainStageController mainStageController;
 
+    //<editor-fold desc="Singleton pattern">
     private Controller(){
         initAlert();
     }
 
-    public double calcCost(Model model) {
-        return Management.getInstance().calcCost(model);
+    private static class ControllerHelper{
+        private static final Controller INSTANCE = new Controller();
     }
+
+    public static Controller getInstance() {
+        return ControllerHelper.INSTANCE;
+    }
+    //</editor-fold>
 
     public void initAlert() {
         alert = new Alert(Alert.AlertType.WARNING);
@@ -39,6 +50,10 @@ public class Controller {
     public void showAlert(String string){
         alert.setContentText(string);
         this.alert.showAndWait();
+    }
+
+    public double calcCost(Model model) {
+        return Management.getInstance().calcCost(model);
     }
 
     public void findAddress(String address) {
@@ -99,18 +114,6 @@ public class Controller {
 
     public void setSave(Model[] save) {
         this.save = save;
-    }
-
-    private static class ControllerHelper{
-        private static final Controller INSTANCE = new Controller();
-    }
-
-    public static Controller getInstance() {
-        return ControllerHelper.INSTANCE;
-    }
-
-    private ObservableList<Model> arrToObs(Model[] modelList) {
-        return FXCollections.observableArrayList(modelList);
     }
 
     public Model[] getOrderList() {

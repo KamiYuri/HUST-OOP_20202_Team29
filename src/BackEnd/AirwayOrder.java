@@ -5,6 +5,9 @@ public class AirwayOrder extends AbsOrder {
     @Override
     protected void calculateShippingCost() {
         shippingCost = distance*100000 + weight*100000 + 200000;
+        if(shippingCost >= 10000000) {
+            shippingCost = 9999999;
+        }
     }
 
     //Constructor

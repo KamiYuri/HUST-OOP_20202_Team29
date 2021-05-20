@@ -25,17 +25,12 @@ public class Management {
     /** Polymorphism */
 
     public AbsOrder convertToOrder(Model model) {
-        AbsOrder absOrder = new AirwayOrder();
-
         if(model.getShipping() == 0) {
-            absOrder = new RoadOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
+            return new RoadOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
                     model.getAddress(), model.getDate(), model.getWeight(), model.getDistance());
         }
-        else if(model.getShipping() == 1) {
-            absOrder = new AirwayOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
+        return new AirwayOrder(model.getSenderName(), model.getSenderPhone(), model.getReceiverName(), model.getReceiverPhone(),
                     model.getAddress(), model.getDate(), model.getWeight(), model.getDistance());
-        }
-        return absOrder;
     }
 
     public ArrayList<AbsOrder> convertToOrder(Model[] models) {

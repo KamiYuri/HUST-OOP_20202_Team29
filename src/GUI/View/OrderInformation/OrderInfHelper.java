@@ -4,6 +4,7 @@ package GUI.View.OrderInformation;
 
 import GUI.Modal.Model;
 
+//Class nhận và trả thông tin cho cửa sổ hiển thị Thông tin đơn hàng
 public class OrderInfHelper {
 
     private static InfController infController;

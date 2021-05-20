@@ -107,8 +107,6 @@ public class MainStageController {
         tableView.setItems(obsList);
     }
 
-
-
     private void updateToController() {
         Controller.getInstance().updateFromUI();
     }

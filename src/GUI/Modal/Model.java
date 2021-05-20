@@ -1,24 +1,27 @@
+//Hoàng Việt Dũng
+
+//Lớp đối tượng của UI
+
 package GUI.Modal;
 
-import GUI.Controller.Controller;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+@SuppressWarnings("ALL")
 public class Model {
     private String senderName, senderPhone, receiverName, receiverPhone, address, date;
     private double weight, distance, shippingCost;
     private int shipping;
-    private String shippingProperty;
 
     public String getShippingProperty() {
         return shippingProperty;
     }
 
+    private String shippingProperty;
+
     public void setShippingProperty(int num) {
         this.shippingProperty = shippingList.get(num);
     }
-
 
     ObservableList<String> shippingList = FXCollections
             .observableArrayList("Đường bộ", "Đường hàng không");
@@ -133,17 +136,4 @@ public class Model {
         this.date = date;
     }
 //endregion
-
-    public void showIn4() {
-        System.out.println(getSenderName());
-        System.out.println(getSenderPhone());
-        System.out.println(getReceiverName());
-        System.out.println(getReceiverPhone());
-        System.out.println(getAddress());
-        System.out.println(getWeight());
-        System.out.println(getDistance());
-        System.out.println(getCost());
-        System.out.println(getShipping());
-        System.out.println(getDate());
-    }
 }
