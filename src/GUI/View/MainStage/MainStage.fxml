@@ -5,8 +5,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,14 +12,15 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1226.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar prefHeight="0.0" prefWidth="1226.0" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem fx:id="add" mnemonicParsing="false" onAction="#addClick" text="Thêm" />
-               </items></Menu>
+            <Menu>
+                <graphic>
+                    <Label fx:id="add" onMouseClicked="#addClick" text="Tạo đơn mới" />
+                </graphic>
+            </Menu>
           <Menu mnemonicParsing="false" text="Tìm kiếm">
             <items>
               <MenuItem fx:id="sender" mnemonicParsing="false" onAction="#senderClick" text="Tên người gửi" />
@@ -37,69 +36,47 @@
       </MenuBar>
    </top>
    <right>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="373.0" prefWidth="217.0" BorderPane.alignment="CENTER">
          <children>
-            <Label contentDisplay="CENTER" layoutX="17.0" layoutY="14.0" prefHeight="73.0" prefWidth="167.0" text="- Nhấn chuột phải vào đơn hàng để thêm chi tiết" wrapText="true" />
-            <Pane fx:id="infIncome" layoutX="-2.0" layoutY="137.0" prefHeight="100.0" prefWidth="203.0" visible="false">
+            <Label contentDisplay="CENTER" layoutX="25.0" layoutY="26.0" prefHeight="73.0" prefWidth="167.0" text="- Nhấn chuột phải vào đơn hàng để thêm chi tiết" wrapText="true" />
+            <Button fx:id="undo" layoutX="17.0" layoutY="332.0" mnemonicParsing="false" onAction="#undoClick" text="Back" visible="false" />
+            <Button fx:id="close" layoutX="136.0" layoutY="332.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
+            <AnchorPane fx:id="infIncome" layoutX="-1.0" layoutY="135.0" prefHeight="138.0" prefWidth="220.0" visible="false">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="4.0" text="Thu nhập trong tháng" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="35.0" layoutY="21.0" text="Thu nhập trong tháng" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="monthIncome" layoutX="85.0" layoutY="24.0" text="11">
-                     <font>
-                        <Font name="System Italic" size="30.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="income" layoutX="56.0" layoutY="69.0" text="90000.0">
+                  <Label fx:id="income" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="89.0" prefHeight="35.0" prefWidth="222.0" textAlignment="CENTER" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
+                  <Label fx:id="monthIncome" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="47.0" prefHeight="45.0" prefWidth="222.0" text="11" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-1.0">
+                     <font>
+                        <Font name="System Italic" size="30.0" />
+                     </font>
+                  </Label>
                </children>
-            </Pane>
-            <Button fx:id="undo" layoutX="17.0" layoutY="332.0" mnemonicParsing="false" onAction="#undoClick" text="Back" visible="false" />
-            <Button fx:id="close" layoutX="136.0" layoutY="332.0" mnemonicParsing="false" onAction="#closeClick" text="Close" />
+            </AnchorPane>
          </children>
       </Pane>
    </right>
    <center>
-      <TabPane id="my-table" prefHeight="200.0" prefWidth="200.0" stylesheets="@../style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Untitled Tab 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView id="my-table" fx:id="tableView" prefHeight="342.0" prefWidth="1026.0" stylesheets="@../style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn fx:id="id_col" editable="false" prefWidth="50.0" resizable="false" text="Thứ tự" />
-                              <TableColumn prefWidth="75.0" text="Người gửi">
-                                 <columns>
-                                    <TableColumn fx:id="senderName_col" prefWidth="170.0" text="Họ tên" />
-                                    <TableColumn fx:id="senderPhone_col" prefWidth="150.0" text="Số điện thoại" />
-                                 </columns>
-                              </TableColumn>
-                              <TableColumn prefWidth="75.0" text="Người nhận">
-                                 <columns>
-                                    <TableColumn fx:id="receiverName_col" prefWidth="170.0" text="Họ tên" />
-                                    <TableColumn fx:id="receiverPhone_col" prefWidth="150.0" text="Số điện thoại" />
-                                 </columns>
-                              </TableColumn>
-                              <TableColumn fx:id="address_col" prefWidth="248.0" text="Địa chỉ giao hàng" />
-                              <TableColumn fx:id="cost_col" prefWidth="87.0" text="Chi phí" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Untitled Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView id="my-table" fx:id="tableView" layoutY="-1.0" prefHeight="374.0" prefWidth="735.0" stylesheets="@../style.css">
+               <columns>
+                  <TableColumn fx:id="id_col" editable="false" prefWidth="58.0" resizable="false" text="Thứ tự" />
+                  <TableColumn fx:id="name_col" prefWidth="142.0" text="Tên người gửi" />
+                  <TableColumn fx:id="address_col" prefWidth="180.0" text="Địa chỉ giao hàng" />
+                  <TableColumn fx:id="shipping_col" prefWidth="109.0" text="Cách vận chuyển" />
+                  <TableColumn fx:id="time_col" prefWidth="120.0" text="Thời gian tạo đơn" />
+                  <TableColumn fx:id="cost_col" prefWidth="129.0" text="Chi phí" />
+               </columns>
+            </TableView>
+         </children>
+      </Pane>
    </center>
 </BorderPane>

@@ -36,24 +36,16 @@ public class MainStageController {
     private Button undo, close;
 
     @FXML
-    private TableView<Modal> tableView = new TableView<>();
+    private final TableView<Modal> tableView = new TableView<>();
 
     @FXML
     private TableColumn<Modal, Number> id_col;
 
     @FXML
-    private TableColumn<Modal, String> senderName_col;
-
+    private TableColumn<Modal, String> name_col, address_col, shipping_col, date_col;
+    
     @FXML
-    private TableColumn<Modal, String> senderPhone_col;
-    @FXML
-    private TableColumn<Modal, String> receiverName_col;
-    @FXML
-    private TableColumn<Modal, String> receiverPhone_col;
-    @FXML
-    private TableColumn<Modal, String> address_col;
-    @FXML
-    private TableColumn<Modal, Integer> cost_col;
+    private TableColumn<Modal, Double> cost_col;
 
     @FXML
     private TableRow<Modal> tableRow;
@@ -75,6 +67,7 @@ public class MainStageController {
         }
     }
 
+    @FXML
     public void initialize() {
         tableView.setStyle( "-fx-alignment: CENTER;");
         tableView.setRowFactory(tv -> {
@@ -104,15 +97,11 @@ public class MainStageController {
             return row ;
         });
 
-        id_col.setCellValueFactory(column -> new ReadOnlyObjectWrapper<Number>(tableView.getItems().indexOf(column.getValue()) + 1));
-        senderName_col.setCellValueFactory(new PropertyValueFactory<>("senderName"));
-        senderPhone_col.setCellValueFactory(new PropertyValueFactory<>("senderPhone"));
-
-        receiverName_col.setCellValueFactory(new PropertyValueFactory<>("receiverName"));
-        receiverPhone_col.setCellValueFactory(new PropertyValueFactory<>("receiverPhone"));
+        id_col.setCellValueFactory(column -> new ReadOnlyObjectWrapper<>(tableView.getItems().indexOf(column.getValue()) + 1));
+        name_col.setCellValueFactory(new PropertyValueFactory<>("senderName"));
         address_col.setCellValueFactory(new PropertyValueFactory<>("address"));
+        shipping_col.setCellValueFactory(new PropertyValueFactory<>("shipping"));
         cost_col.setCellValueFactory(new PropertyValueFactory<>("cost"));
-
         tableView.setItems(obsList);
     }
 
@@ -151,9 +140,7 @@ public class MainStageController {
 
     @FXML
     public void closeClick() {
-        this.close.setOnMouseClicked(mouseEvent -> {
-            thisStage.close();
-        });
+        this.close.setOnMouseClicked(mouseEvent -> thisStage.close());
     }
     
     @FXML
@@ -168,13 +155,16 @@ public class MainStageController {
     //Menu thêm đơn hàng
 
     @FXML
-    private  MenuItem add;
+    private  Label add;
 
     @FXML
     public void addClick() {
-        add.setOnAction(actionEvent -> {
-            obsList.add(OrderInfHelper.makeNewOrder());
-            updateToController();
+        add.setOnMouseClicked(mouseEvent -> {
+            Modal tmp = OrderInfHelper.makeNewOrder();
+            if(tmp != null){
+                obsList.add(tmp);
+                updateToController();
+            }
         });
     }
 

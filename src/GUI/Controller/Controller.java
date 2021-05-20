@@ -157,9 +157,7 @@ public class Controller {
     public void updateFromUI() {
         this.setOrderList(mainStageController.getOrderList());
         for(int i = 0; i < this.modalList.length; i++) {
-            System.out.println(i + "\n");
             this.modalList[i].showIn4();
-            System.out.println("\n");
         }
         Management.getInstance().updateFromController(this.modalList);
     }

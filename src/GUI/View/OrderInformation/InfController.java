@@ -2,11 +2,8 @@ package GUI.View.OrderInformation;
 
 import GUI.Controller.Controller;
 import GUI.Modal.Modal;
+
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +14,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.converter.LocalDateStringConverter;
 
 import java.time.LocalDate;
@@ -25,6 +23,7 @@ import java.util.Objects;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("ALL")
 public class InfController {
     private boolean NEW_ORDER = true;
     private final Stage thisStage = new Stage();
@@ -43,6 +42,7 @@ public class InfController {
     private final ObservableList<String> wayList = FXCollections.observableArrayList("Đường bộ", "Đường hàng không");
 
     private Modal modal;
+    private static boolean submitFlag = false;
 
     private Label[] getLabels() {
         Label[] arr = new Label[9];
@@ -100,28 +100,26 @@ public class InfController {
             e.printStackTrace();
         }
     }
+//
+//    1-999, 0.001 - 998.999
+//            ^\d*\.?\d*$
 
     public void initialize() {
+//        thisStage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, windowEvent -> {
+//            if(!submitFlag){
+//                this.modal = null;
+//            }
+//        });
+        
+        senderNameInput.setTextFormatter(getFomatter("^[\\p{L} ]{0,20}+(\\s[\\p{L} ]+)?$"));
+        receiverNameInput.setTextFormatter(getFomatter("^[\\p{L} ]{0,20}+(\\s[\\p{L} ]+)?$"));
+        senderPhoneInput.setTextFormatter(getFomatter("\\d{0,11}"));
+        receiverPhoneInput.setTextFormatter(getFomatter("\\d{0,11}"));
 
-        Pattern pattern_num = Pattern.compile("\\d{0,11}");
+        weightInput.setTextFormatter(getFomatter("(^100$)|(^\\d{0,2}$)|(^[0-9]?[0-9]\\.(\\d{0,3}+)$)"));
+        distanceInput.setTextFormatter(getFomatter("(^1000$)|(^\\d{0,3}$)|(^[0-9]?[0-9]?[0-9]\\.(\\d{0,3}+)$)"));
 
-        senderPhoneInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
-            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
-        receiverPhoneInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
-            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
-        weightInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
-            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
-        distanceInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
-            return pattern_num.matcher(change.getControlNewText()).matches() ? change : null; }));
-
-        Pattern pattern_name = Pattern.compile("^[a-zA-Z]+");
-
-        senderNameInput.setTextFormatter(new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
-            return pattern_name.matcher(change.getControlNewText()).matches() ? change : null; }));
-
-
-
-                bindData();
+        bindData();
         wayInput.setItems(this.wayList);
 
         if(NEW_ORDER){
@@ -149,6 +147,13 @@ public class InfController {
             cost.setText(Double.toString(this.modal.getCost()));
             dateInput.setValue(convertStringToDate(this.modal.getDate()));
         }
+    }
+
+    private TextFormatter getFomatter(String string) {
+        Pattern pattern = Pattern.compile(string);
+
+        return new TextFormatter((UnaryOperator<TextFormatter.Change>) change -> {
+            return pattern.matcher(change.getControlNewText()).matches() ? change : null;});
     }
 
     public void setOrder(Modal modal) {
@@ -212,8 +217,8 @@ public class InfController {
     @FXML
     public void submitClick() {
         this.submit.setOnMouseClicked(mouseEvent -> {
-            System.out.println("show clicked");
             if(isInputNull()){
+                submitFlag = true;
                 update();
 //                cost.setText(Double.toString(this.modal.getCost()));
                 swapScene(SCENE.SHOW);
@@ -232,9 +237,7 @@ public class InfController {
         modal.setShipping(wayList.indexOf(wayInput.getValue()));
         modal.setDate(convertDateToString(dateInput.getValue()));
         modal.setCost(Controller.getInstance().calcCost(this.modal));
-        this.costInput.setText(Double.toString(modal.getCost()));
-
-
+        costInput.setText(Double.toString(modal.getCost()));
     }
 
     @FXML
@@ -242,7 +245,7 @@ public class InfController {
         this.done.setOnMouseClicked(mouseEvent -> {
             System.out.println("done clicked");
             update();
-//            this.modal.showIn4();
+            this.modal.showIn4();
             this.thisStage.close();
         });
     }
